@@ -15,11 +15,11 @@ def fit(a: str):
     if a.isnumeric():
         if len(a) > 4:
             print(a)
-            return "Error: Numbers cannot be more than four digits."
+            return -1
         else:
             return a
     else:
-        return "Error: Numbers must only contain digits."
+        return -2
 
 
 def arithmetic_arranger(calculations: List, Calculate=False):
@@ -42,6 +42,11 @@ def arithmetic_arranger(calculations: List, Calculate=False):
         x = fit(calculations[len(calculations)-1-a][0])
         y = fit(calculations[len(calculations)-1-a][1])
 
+        if x == -1 or y  == -1:
+          return "Error: Numbers cannot be more than four digits."
+        elif x == -2 or y == -2:
+          return "Error: Numbers must only contain digits."
+
         if len(x) > len(y):
             l3 = addtostr(l3, "-"*len(x))
             while 1:
@@ -62,15 +67,15 @@ def arithmetic_arranger(calculations: List, Calculate=False):
         l2 = addtostr(l2, y)
 
         if a+1 != len(calculations):
-            l1 = addtostr(l1, "    ")
-            l2 = addtostr(l2, "  {} ".format(calculations[len(calculations)-1-a][2]))
-            l3 = addtostr(l3, "  --")
+            l1 = addtostr(l1, "      ")
+            l2 = addtostr(l2, "    {} ".format(calculations[len(calculations)-1-a][2]))
+            l3 = addtostr(l3, "    --")
         else:
             l1 = addtostr(l1, "  ")
             l2 = addtostr(l2, "{} ".format(calculations[len(calculations)-1-a][2]))
             l3 = addtostr(l3, "--")
 
-    result = l1+"\n"+l2+"\n"+l3
+    
     ref = l3.split()
     if Calculate:
         l4 = ""
@@ -90,7 +95,7 @@ def arithmetic_arranger(calculations: List, Calculate=False):
         print(result)
         return result
     else:
-        result = l1+"\n"+l2+"\n"+l3
-        print(result)
-        return result
+      result = l1+"\n"+l2+"\n"+l3
+      print(result)
+      return result
 
